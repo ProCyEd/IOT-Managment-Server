@@ -1,10 +1,10 @@
-const createBoxReservation = require('./boxReservation')
+const checkAvailable = require('./boxReservation')
 
 const express = require('express')
 var bodyParser = require('body-parser')
 const cookie = require('cookie')
 const app = express()
-const port = 3000
+const port = 3001
 
 app.use(bodyParser.json())
 
@@ -13,17 +13,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/reservation', (req, res) => {
-    console.log(req.body)
-    const token = createBoxReservation(req.body)
-    
-    res.setHeader("Set-Cookie", cookie.serialize("token", token, {
-        httpOnly: true,
-        //secure: needs to be set to https only but in dev we dont have that
-        maxAge: 60 * 60,
-        sameSite: "strict",
-        path: "/"
-      }))
-    res.status(200)
+
+    checkAvailable(req.body, (token) => {
+      if(token != null) {
+        res.setHeader("Set-Cookie", cookie.serialize("token", token, {
+          httpOnly: true,
+          //secure: needs to be set to https only but in dev we dont have that
+          maxAge: 60 * 60,
+          sameSite: "strict",
+          path: "/"
+        }))
+        res.sendStatus(200)
+      } else {
+        res.sendStatus(403);
+      }
+    })
 })
 
 app.listen(port, () => {
