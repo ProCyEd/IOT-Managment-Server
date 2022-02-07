@@ -12,7 +12,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/api/reservation', (req, res) => {
+app.post('/api/reservation', (req, res) => {
+
+  console.log("Incoming")
 
     checkAvailable(req.body, (token) => {
       if(token != null) {
