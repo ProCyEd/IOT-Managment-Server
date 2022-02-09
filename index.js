@@ -1,5 +1,7 @@
 const checkAvailable = require('./boxReservation')
 const publish = require('./rabbitMQ/publish')
+const login = require('./auth/login')
+const auth = require('./auth/authorization')
 
 const express = require('express')
 var bodyParser = require('body-parser')
@@ -17,6 +19,27 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.post('/login', (req, res) => {
+  login(req, (token, mes) => {
+    if(token != null) {
+      res.setHeader("Set-Cookie", cookie.serialize("session", token, {
+        httpOnly: true,
+        //secure: needs to be set to https only but in dev we dont have that
+        maxAge: 60 * 60,
+        sameSite: "strict",
+        path: "/"
+      }))
+      res.sendStatus(200)
+    } else {
+      res.sendStatus(403);
+    }
+  })
+})
+
+app.post('/authenticate', auth, (req, res) => {
+  res.send({verified: true})
+})
+
 function validateSession(req, res, next) {
   if(req.cookies.token) {
     next()
@@ -25,13 +48,13 @@ function validateSession(req, res, next) {
   }
 }
 
-app.post('/control/publish', validateSession, (req, res) => {
+app.post('/control/publish', auth, (req, res) => {
   publish(req.body.message, (response)=> {
     res.send(response);
   })
 })
 
-app.post('/api/reservation', validateSession, (req, res) => {
+app.post('/api/reservation', auth, (req, res) => {
 
   console.log("Incoming")
 
