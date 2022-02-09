@@ -1,4 +1,5 @@
 const checkAvailable = require('./boxReservation')
+const publish = require('./rabbitMQ/publish')
 
 const express = require('express')
 var bodyParser = require('body-parser')
@@ -16,12 +17,21 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-function middleware(req, res, next) {
-  console.log(req.cookies)
-  next()
+function validateSession(req, res, next) {
+  if(req.cookies.token) {
+    next()
+  } else {
+    res.sendStatus(403);
+  }
 }
 
-app.post('/api/reservation', middleware, (req, res) => {
+app.post('/control/publish', validateSession, (req, res) => {
+  publish(req.body.message, (response)=> {
+    res.send(response);
+  })
+})
+
+app.post('/api/reservation', validateSession, (req, res) => {
 
   console.log("Incoming")
 
