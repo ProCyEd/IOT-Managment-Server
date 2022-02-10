@@ -29,6 +29,7 @@ app.post('/login', (req, res) => {
         sameSite: "strict",
         path: "/"
       }))
+      console.log("session issued")
       res.sendStatus(200)
     } else {
       res.sendStatus(403);
@@ -36,17 +37,25 @@ app.post('/login', (req, res) => {
   })
 })
 
+app.post('/logout', auth, (req, res) => {
+  try {
+    res.setHeader("Set-Cookie", cookie.serialize("session", "", {
+      httpOnly: true,
+      //secure: needs to be set to http only but in dev we dont have that
+      expires: new Date(0),
+      sameSite: "strict",
+      path: "/"
+    }))
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(404);
+  }
+ 
+})
+
 app.post('/authenticate', auth, (req, res) => {
   res.send({verified: true})
 })
-
-function validateSession(req, res, next) {
-  if(req.cookies.token) {
-    next()
-  } else {
-    res.sendStatus(403);
-  }
-}
 
 app.post('/control/publish', auth, (req, res) => {
   publish(req.body.message, (response)=> {
