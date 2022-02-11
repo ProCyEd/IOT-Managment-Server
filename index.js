@@ -30,7 +30,7 @@ app.post('/login', (req, res) => {
         path: "/"
       }))
       console.log("session issued")
-      res.sendStatus(200)
+      //res.sendStatus(200)
     } else {
       res.sendStatus(403);
     }
