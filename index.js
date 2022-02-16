@@ -1,5 +1,6 @@
 const checkAvailable = require('./boxReservation')
 const publish = require('./rabbitMQ/publish')
+const consume = require('./rabbitMQ/consume')
 const login = require('./auth/login')
 const auth = require('./auth/authorization')
 
@@ -10,6 +11,21 @@ var cors = require('cors')
 const cookie = require('cookie')
 const app = express()
 const port = 3001
+
+const amqp = require('amqplib')
+
+var channelPub = null;
+var channelCon = null;
+
+async function start() {
+  const connectionPub = await amqp.connect("amqps://msdqunsz:8HfRRHR4k_1MnSrcSnL2dFadlDbYhsGJ@fish.rmq.cloudamqp.com/msdqunsz")
+  channelPub = await connectionPub.createChannel();
+
+  const connectionCon = await amqp.connect("amqps://msdqunsz:8HfRRHR4k_1MnSrcSnL2dFadlDbYhsGJ@fish.rmq.cloudamqp.com/msdqunsz")
+  channelCon = await connectionCon.createChannel();
+}
+
+start()
 
 app.use(bodyParser.json())
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
@@ -30,7 +46,7 @@ app.post('/login', (req, res) => {
         path: "/"
       }))
       console.log("session issued")
-      //res.sendStatus(200)
+      res.sendStatus(200)
     } else {
       res.sendStatus(403);
     }
@@ -58,8 +74,17 @@ app.post('/authenticate', auth, (req, res) => {
 })
 
 app.post('/control/publish', auth, (req, res) => {
-  publish(req.body.message, (response)=> {
-    res.send(response);
+  publish(req.body.message, channelPub, async (response)=> {
+    console.log(response)
+    if(response.status == true) {
+      await channelCon.consume('backendSend', function (msg) {
+        console.log(msg)
+        channelCon.ack(msg);
+        })
+      res.send(response);
+    } else {
+      res.send(response);
+    }
   })
 })
 
@@ -86,3 +111,9 @@ app.post('/api/reservation', auth, (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+process.on('exit', function() {
+  console.log('About to exit.');
+  connectionPub.close()
+  connectionCon.close()
+});
