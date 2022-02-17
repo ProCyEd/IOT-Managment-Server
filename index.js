@@ -78,10 +78,10 @@ app.post('/control/publish', auth, (req, res) => {
     console.log(response)
     if(response.status == true) {
       await channelCon.consume('backendSend', function (msg) {
-        console.log(msg)
+        console.log(msg.content.toString() + " : mes")
         channelCon.ack(msg);
+        res.send({msg: msg.content.toString()})
         })
-      res.send(response);
     } else {
       res.send(response);
     }
