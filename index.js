@@ -35,6 +35,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/page', (req, res) => {
+  data = {html: '<h1 style="color:blue;" >Hello World</h1>'}
+  res.send(data)
+})
+
 app.post('/login', (req, res) => {
   login(req, (token, mes) => {
     if(token != null) {
