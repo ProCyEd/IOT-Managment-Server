@@ -46,6 +46,8 @@ app.get('/file', (req, res) => {
   res.sendFile('C:/Users/rasco/Documents/GitHub/IOT-Managment-Server' + '/templates/html.txt')
 })
 
+//hello
+
 app.post('/login', (req, res) => {
   login(req, (token, mes) => {
     if(token != null) {
