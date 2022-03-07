@@ -87,7 +87,14 @@ app.post('/authenticate', auth, (req, res) => {
 })
 
 app.post('/control/publish', auth, (req, res) => {
-  publish(req.body.message, channelPub, async (response)=> {
+  console.log(req.body.message)
+  if(req.body.message) {
+    res.send({msg: 'True', status: req.body.message})
+  } else {
+    res.send({msg: 'False'})
+  }
+  
+  /* publish(req.body.message, channelPub, async (response)=> {
     console.log(response)
     if(response.status == true) {
       await channelCon.consume('backendSend', function (msg) {
@@ -98,7 +105,7 @@ app.post('/control/publish', auth, (req, res) => {
     } else {
       res.send(response);
     }
-  })
+  }) */
 })
 
 app.post('/api/reservation', auth, (req, res) => {
