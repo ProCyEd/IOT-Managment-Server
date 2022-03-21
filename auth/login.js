@@ -17,6 +17,14 @@ async function login(req, callback) {
                 email: 'millercc23@mail.vmi.edu',
                 password: 'admin'
             },
+            {
+                email: 'noonanam24@mail.vmi.edu',
+                password: 'admin'
+            },
+            {
+                email: 'ricepw24@mail.vmi.edu',
+                password: 'admin'
+            },
         ];
 
         for(let i = 0; i < people.length; i++) {
