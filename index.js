@@ -32,6 +32,9 @@ app.use(bodyParser.json())
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(cookieParser());
 
+app.post('/test', (req, res) => {
+  res.send({data: 'Hello World!'})
+  })
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
