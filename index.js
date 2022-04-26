@@ -32,17 +32,614 @@ app.use(bodyParser.json())
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(cookieParser());
 
+const templateData = [
+  {
+      "id": 1,
+      "name": "BoxOne",
+      "router": "router1",
+      "location": "location1",
+      "description": "description1",
+      "devices": [
+          {
+              "info": {
+                  "title": "LightBulb",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device1"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+          {
+              "info": {
+                  "title": "LightBulb",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device1"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+          {
+              "info": {
+                  "title": "LightBulb",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device1"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+          {
+              "info": {
+                  "title": "LightBulb",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device1"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+      ]
+  },
+  {
+      "id": 2,
+      "name": "BoxOne",
+      "router": "router1",
+      "location": "location1",
+      "description": "description1",
+      "devices": [
+          {
+              "info": {
+                  "title": "Not a light Buld",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device2"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+          {
+              "info": {
+                  "title": "LightBulb",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device1"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+          {
+              "info": {
+                  "title": "LightBulb",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device1"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+          {
+              "info": {
+                  "title": "LightBulb",
+                  "description": "Reprehenderit qui consectetur aute cupidatat velit commodo deserunt eu nulla eu. Nisi nulla enim aute et amet deserunt minim minim culpa. Proident cillum veniam velit sunt culpa laborum ullamco esse officia irure proident enim anim.",
+              },
+              "fields": [
+                  {
+                      "label": "name",
+                      "value": "device1"
+                  },
+                  {
+                      "label": "description",
+                      "value": "description1"
+                  },
+                  {
+                      "label": "ip",
+                      "value": "ip1"
+                  },
+                  {
+                      "label": "mac",
+                      "value": "mac1"
+                  },
+                  {
+                      "label": "vendor",
+                      "value": "vendor1"
+                  },
+                  {
+                      "label": "type",
+                      "value": "type1"
+                  },
+                  {
+                      "label": "status",
+                      "value": "status1"
+                  },
+                  {
+                      "label": "protocol",
+                      "value": "protocol1"
+                  },
+              ],
+              "controlls": [
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Slider",
+                      "type": "slider",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+                  {
+                      "name": "Radio",
+                      "type": "select",
+                      "value": "value1",
+                      "status": "status1",
+                      "options": [
+                          "option1",
+                          "option2",
+                          "option3",
+                      ]
+                  },
+                  {
+                      "name": "Switch",
+                      "type": "switch",
+                      "value": "value1",
+                      "status": "status1",
+                  },
+              ]
+          },
+      ]
+  },
+]
+
 app.post('/test', (req, res) => {
   res.send({data: 'Hello World!'})
   })
+
+app.post('/addBox', (req, res) => {
+  const box = req.body
+  console.log(box)
+  publish(box, channelPub, async (response) => {
+    console.log(response)
+    res.send(response)
+    })
+})
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/page', (req, res) => {
-  data = {html: '<h1>Hello World</h1>'}
-  res.send(data)
+app.get('/getTemplateData', (req, res) => {
+  res.send({templateData: templateData})
 })
 
 app.get('/file', (req, res) => {
